@@ -1,6 +1,8 @@
 defmodule RsvpWeb.EventController do
   use RsvpWeb.Web, :controller
 
+  plug RsvpWeb.AuthorizedPlug, "create" when action in [:create]
+
   def list(conn, _params) do
     events = Rsvp.EventQueries.get_all()
     render conn, "list.html", events: events
